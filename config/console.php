@@ -10,7 +10,7 @@ return [
   'id' => 'dbmigrator',
   'controllerMap' => [
     'migrate'=>[
-      'class'=>'migrator\commands\MigrateController',
+      'class'=>'app\commands\MigrateController',
       'migrationLookup'=>[
         '@migrations',
         // add other migration path here

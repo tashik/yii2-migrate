@@ -20,7 +20,7 @@ if ($i) {
 }
 
 if($loader) {
-  $loader->set('migrator', $basepath . '/vendor/yii2-migrate/app');
+  $loader->set('app', $basepath . '/vendor/tashik/yii2-migrate');
 }
 defined('BASE_PATH') || define('BASE_PATH', $basepath);
 

@@ -6,7 +6,7 @@
  * Time: 13:03
  */
 
-namespace migrator\commands;
+namespace app\commands;
 
 use Yii;
 use yii\helpers\ArrayHelper;
