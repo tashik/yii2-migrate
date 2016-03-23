@@ -33,7 +33,22 @@ defined('YII_DEBUG') || define('YII_DEBUG',true);
 
 $ap_config = include($currentpath.'/config/console.php');
 
-$db_config = @include("{$basepath}/config/autoload/migration".RUNTIME_ENV.".php");
+if (!isset($db_config)) {
+  $db_config = @include("{$basepath}/config/autoload/migration".RUNTIME_ENV.".php");
+} else {
+  $db_config = array(
+    'components' => [
+      'db' => [
+        'class' => 'yii\db\Connection',
+        'dsn' => $db_config['dsn'],
+        'user' => $db_config['user'],
+        'password' => $db_config['password'],
+        'charset' => isset($db_config['charset']) ? $db_config['charset'] : 'utf8',
+      ]
+    ]
+  );
+}
+
 
 if (!$db_config) {
   throw new RuntimeException("Migration config in {$basepath}/config/autoload/migration".RUNTIME_ENV.".php not found, please use {$currentpath}/config/migration.php-default to create one");

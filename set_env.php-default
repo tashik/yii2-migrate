@@ -6,5 +6,12 @@
  * Time: 12:34
  */
 
- define ('RUNTIME_ENV', 'global');
- define ('YII_DEBUG', false);
+define ('RUNTIME_ENV', 'global');
+define ('YII_DEBUG', false);
+
+$db_config = array(
+     'dsn' => 'pgsql:host=localhost;dbname=dbname',
+     'username' => 'user',
+     'password' => 'password',
+     'charset' => 'utf8',
+);
