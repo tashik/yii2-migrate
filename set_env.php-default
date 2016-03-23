@@ -1,0 +1,10 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: tashik
+ * Date: 23.03.16
+ * Time: 12:34
+ */
+
+ define ('RUNTIME_ENV', 'global');
+ define ('YII_DEBUG', false);
