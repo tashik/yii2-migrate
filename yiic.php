@@ -12,10 +12,10 @@ $basepath = $currentpath;
 $loader = null;
 $i = 4;
 while (!file_exists($basepath.'/vendor/autoload.php') && $i-->0) {
-  $basepath = $basepath.'/..';
+  $basepath_relative = $basepath.'/..';
 }
 if ($i) {
-  $basepath = realpath($basepath);
+  $basepath = realpath($basepath_relative);
   $loader = include($basepath . '/vendor/autoload.php');
 }
 
@@ -24,29 +24,40 @@ if($loader) {
 }
 defined('BASE_PATH') || define('BASE_PATH', $basepath);
 
-$env = getenv('YIIMIGRATE_ENV');
-
-if ($env) {
-  $env = "-{$env}";
-} else {
-  $env = '';
+if (file_exists($basepath.'/set_env.php')) {
+  require_once ($basepath.'/set_env.php');
 }
+
+defined('RUNTIME_ENV') || define('RUNTIME_ENV', 'global');
+defined('YII_DEBUG') || define('YII_DEBUG',true);
 
 $ap_config = include($currentpath.'/config/console.php');
 
-$db_config = @include("{$basepath}/app/config/migration{$env}.php");
+$db_config = @include("{$basepath}/config/autoload/migration".RUNTIME_ENV.".php");
+
 if (!$db_config) {
-  throw new RuntimeException("Migration config in {$basepath}/config/migration{$env}.php not found, please use {$currentpath}/config/migration.php-default to create one");
+  throw new RuntimeException("Migration config in {$basepath}/config/autoload/migration".RUNTIME_ENV.".php not found, please use {$currentpath}/config/migration.php-default to create one");
 }
 
 $config = array_merge($ap_config, $db_config);
 
 $config['basePath'] = $basepath;
 
-defined('YII_DEBUG') || define('YII_DEBUG',true);
-
 // include Yii class file
 require($basepath . '/vendor/yiisoft/yii2/Yii.php');
+
+if (is_dir($basepath.'/module')) {
+  Yii::setAlias('@modules', $basepath.'/module');
+  $modules_list = array_diff(scandir($basepath.'/module'), array('..', '.'));
+
+  if (count($modules_list)) {
+    foreach($modules_list as $module) {
+      if(is_dir($basepath.'/'.$module.'/migrations')) {
+        $config['controllerMap']['migrate']['migrationLookup'][] = '@modules/'.$module.'/migrations';
+      }
+    }
+  }
+}
 
 $application = new yii\console\Application($config);
 $exitCode = $application->run();

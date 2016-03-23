@@ -1,0 +1,16 @@
+<?php
+// This is the configuration for yiic console application.
+// Any writable CConsoleApplication properties can be configured here.
+return array(
+  // application components
+  'components'=>array(
+    'db'=>array(
+      'class' => 'yii\db\Connection',
+      'dsn' => 'pgsql:host=localhost;dbname=dbname',
+      'username' => 'user',
+      'password' => 'password',
+      'charset' => 'utf8',
+    ),
+  ),
+
+);
