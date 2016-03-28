@@ -11,6 +11,7 @@ return [
   'controllerMap' => [
     'migrate'=>[
       'class'=>'app\commands\MigrateController',
+      'interactive' => false,
       'migrationLookup'=>[] // all paths to migrations shall be configured here manually or dynamically
     ]
   ]

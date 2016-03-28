@@ -12,10 +12,11 @@ $basepath = $currentpath;
 $loader = null;
 $i = 4;
 while (!file_exists($basepath.'/vendor/autoload.php') && $i-->0) {
-  $basepath_relative = $basepath.'/..';
+  $basepath = $basepath.'/..';
 }
 if ($i) {
-  $basepath = realpath($basepath_relative);
+  $basepath_relative = $basepath;
+  $basepath = realpath($basepath);
   $loader = include($basepath . '/vendor/autoload.php');
 }
 
@@ -33,8 +34,12 @@ defined('YII_DEBUG') || define('YII_DEBUG',true);
 
 $ap_config = include($currentpath.'/config/console.php');
 
+if(RUNTIME_ENV) {
+  $env = '-'.RUNTIME_ENV;
+}
+
 if (!isset($db_config)) {
-  $db_config = @include("{$basepath}/config/autoload/migration".RUNTIME_ENV.".php");
+  $db_config = @include("{$basepath}/config/autoload/migration".$env.".php");
 } else {
   $db_config = array(
     'components' => [
@@ -51,7 +56,7 @@ if (!isset($db_config)) {
 
 
 if (!$db_config) {
-  throw new RuntimeException("Migration config in {$basepath}/config/autoload/migration".RUNTIME_ENV.".php not found, please use {$currentpath}/config/migration.php-default to create one");
+  throw new RuntimeException("Migration config in {$basepath}/config/autoload/migration".$env.".php not found, please use {$currentpath}/config/migration.php-default to create one");
 }
 
 $config = array_merge($ap_config, $db_config);
