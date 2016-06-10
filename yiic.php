@@ -35,7 +35,7 @@ defined('YII_DEBUG') || define('YII_DEBUG',true);
 $ap_config = include($currentpath.'/config/console.php');
 
 if(RUNTIME_ENV) {
-  $env = '-'.RUNTIME_ENV;
+  $env = '.'.RUNTIME_ENV;
 }
 
 if (!isset($db_config)) {
