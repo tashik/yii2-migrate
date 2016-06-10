@@ -18,6 +18,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
    */
   public $migrationLookup = [];
 
+  public $migrationPath = '@app/migrations/db';
   /**
    * @var array
    */

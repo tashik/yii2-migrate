@@ -65,15 +65,20 @@ $config['basePath'] = $basepath;
 
 // include Yii class file
 require($basepath . '/vendor/yiisoft/yii2/Yii.php');
-
+/**
+ * We are determining what type of migrations was called and using right subdirectory
+ */
+$type = $argv[1];
+$isDb = strpos($type, 'mongo') === false;
+$subDir = $isDb ? 'db' : 'mongo';
+$mapKey = $isDb ? 'migrate' : 'mongodb-migrate';
 if (is_dir($basepath.'/module')) {
   Yii::setAlias('@modules', $basepath.'/module');
   $modules_list = array_diff(scandir($basepath.'/module'), array('..', '.'));
-
   if (count($modules_list)) {
     foreach($modules_list as $module) {
-      if(is_dir($basepath.'/'.$module.'/migrations')) {
-        $config['controllerMap']['migrate']['migrationLookup'][] = '@modules/'.$module.'/migrations';
+      if(is_dir($basepath.'/module/'.$module.'/migrations/'. $subDir)) {
+        $config['controllerMap'][$mapKey]['migrationLookup'][] = '@modules/'.$module.'/migrations/'.$subDir;
       }
     }
   }
