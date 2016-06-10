@@ -1,24 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: tashik
- * Date: 22.03.16
- * Time: 13:03
- */
-
 namespace app\commands;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\mongodb\console\controllers\MigrateController as BaseMongoMigrationController;
 
-class MigrateController extends \yii\console\controllers\MigrateController
+class MongoMigrateController extends BaseMongoMigrationController
 {
   /**
    * @var array
    */
   public $migrationLookup = [];
 
-  public $migrationPath = '@app/migrations/db';
+  public $migrationPath = '@app/migrations/mongo';
+
   /**
    * @var array
    */

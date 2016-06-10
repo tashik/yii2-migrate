@@ -11,6 +11,10 @@ return array(
       'password' => 'password',
       'charset' => 'utf8',
     ),
+    'mongodb' => [
+      'class' => '\yii\mongodb\Connection',
+      'dsn' => 'mongodb://localhost:27017/dbname',
+    ],
   ),
 
 );
