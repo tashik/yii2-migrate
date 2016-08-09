@@ -8,6 +8,7 @@
 
 return [
   'id' => 'dbmigrator',
+  'enableCoreCommands' => false,
   'controllerMap' => [
     'migrate'=>[
       'class'=>'app\commands\MigrateController',
