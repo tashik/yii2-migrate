@@ -61,8 +61,8 @@ class MigrateController extends \yii\console\controllers\MigrateController
   {
     $file = $this->getMigrationFiles()[$class];
     require_once($file);
-
-    return new $class(['db' => $this->db]);
+    $dbUsers = ArrayHelper::getValue(Yii::$app->params, 'yii.migrations.db.dbUsers', array());
+    return new $class(['db' => $this->db], $dbUsers );
   }
 
   protected function getNewMigrations()

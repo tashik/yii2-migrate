@@ -10,6 +10,12 @@ return array(
       'username' => 'user',
       'password' => 'password',
       'charset' => 'utf8',
+      'dbUsers' => arrray(
+        'db_owner' => 'test',
+        'server_user' => 'test',
+        'rw_group' => 'test',
+        'ro_group' => 'test'
+      )
     ),
     'mongodb' => [
       'class' => '\yii\mongodb\Connection',
