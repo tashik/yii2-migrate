@@ -2,6 +2,14 @@
 // This is the configuration for yiic console application.
 // Any writable CConsoleApplication properties can be configured here.
 return array(
+  'params' => array(
+    'dbUsers' => array(
+            'db_owner' => 'test',
+            'server_user' => 'test',
+            'rw_group' => 'test',
+            'ro_group' => 'test'
+          )
+  ),
   // application components
   'components'=>array(
     'db'=>array(
@@ -10,12 +18,6 @@ return array(
       'username' => 'user',
       'password' => 'password',
       'charset' => 'utf8',
-      'dbUsers' => arrray(
-        'db_owner' => 'test',
-        'server_user' => 'test',
-        'rw_group' => 'test',
-        'ro_group' => 'test'
-      )
     ),
     'mongodb' => [
       'class' => '\yii\mongodb\Connection',
