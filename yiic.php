@@ -46,7 +46,7 @@ if (!isset($db_config)) {
       'db' => [
         'class' => 'yii\db\Connection',
         'dsn' => $db_config['dsn'],
-        'user' => $db_config['user'],
+        'username' => $db_config['username'],
         'password' => $db_config['password'],
         'charset' => isset($db_config['charset']) ? $db_config['charset'] : 'utf8',
       ]
