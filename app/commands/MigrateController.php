@@ -62,7 +62,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
     $file = $this->getMigrationFiles()[$class];
     require_once($file);
     $params = Yii::$app->params;
-    $dbUsers = $params['dbUsers'];
+    $dbUsers = (isset($params['dbUsers'])) ? $params['dbUsers'] : array();
     return new $class(['db' => $this->db], $dbUsers );
   }
 
