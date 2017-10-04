@@ -14,7 +14,9 @@ return [
       'class'=>'app\commands\MigrateController',
       'interactive' => false,
       'templateFile' => '@app/migrations/template.php',
-      'migrationLookup'=>[] // all paths to migrations shall be configured here manually or dynamically
+      'migrationLookup'=>[
+          '@app/migrations/db/documentizer'
+      ] // all paths to migrations shall be configured here manually or dynamically
     ],
     'mongodb-migrate' => [
       'class'=>'app\commands\MongoMigrateController',

@@ -69,12 +69,12 @@ class MigrateController extends \yii\console\controllers\MigrateController
   {
     $applied = [];
     foreach ($this->getMigrationHistory(null) as $version => $time) {
-      $applied[substr($version, 1, 13)] = true;
+      $applied[$version] = true;
     }
 
     $migrations = [];
     foreach ($this->getMigrationFiles() as $version => $path) {
-      if (!isset($applied[substr($version, 1, 13)])) {
+      if (!isset($applied[$version])) {
         $migrations[] = $version;
       }
     }
