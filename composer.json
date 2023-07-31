@@ -15,7 +15,7 @@
     }
   },
   "require": {
-    "yiisoft/yii2": "2.0.38",
+    "yiisoft/yii2": "2.0.42",
     "yiisoft/yii2-mongodb": "^2.0"
   },
   "bin": ["migrator"]
